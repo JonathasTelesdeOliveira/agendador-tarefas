@@ -1,6 +1,6 @@
 package com.jhonatanTeles.agendadorTarefas.Infraestruture.client;
 
-import com.jhonatanTeles.agendadorTarefas.Infraestruture.busines.dto.UsuarioDTO;
+import com.jhonatanTeles.agendadorTarefas.busines.dto.UsuarioDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;

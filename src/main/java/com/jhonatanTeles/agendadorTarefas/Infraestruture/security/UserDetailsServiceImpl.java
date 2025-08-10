@@ -1,6 +1,6 @@
 package com.jhonatanTeles.agendadorTarefas.Infraestruture.security;
 
-import com.jhonatanTeles.agendadorTarefas.Infraestruture.busines.dto.UsuarioDTO;
+import com.jhonatanTeles.agendadorTarefas.busines.dto.UsuarioDTO;
 import com.jhonatanTeles.agendadorTarefas.Infraestruture.client.UsuarioClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;

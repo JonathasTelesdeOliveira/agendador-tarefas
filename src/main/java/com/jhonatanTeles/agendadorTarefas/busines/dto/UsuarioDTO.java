@@ -1,4 +1,4 @@
-package com.jhonatanTeles.agendadorTarefas.Infraestruture.busines.dto;
+package com.jhonatanTeles.agendadorTarefas.busines.dto;
 
 
 import lombok.*;
