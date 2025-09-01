@@ -5,7 +5,7 @@ import com.jhonatanTeles.agendadorTarefas.Infraestruture.entity.TarefasEntity;
 import com.jhonatanTeles.agendadorTarefas.Infraestruture.repository.TarefaRepository;
 import com.jhonatanTeles.agendadorTarefas.Infraestruture.security.JwtUtil;
 import com.jhonatanTeles.agendadorTarefas.busines.Mapper.TarefaMapper;
-import com.jhonatanTeles.agendadorTarefas.busines.Mapper.TarefaUpdateConverter;
+import com.jhonatanTeles.agendadorTarefas.busines.converter.TarefaConverter;
 import com.jhonatanTeles.agendadorTarefas.busines.dto.TarefaDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class TarefaService {
     private final TarefaRepository tarefaRepository;
     private final TarefaMapper tarefaMapper;
     private final JwtUtil jwtUtil;
-    private final TarefaUpdateConverter tarefaUpdateConverter;
+    private final TarefaConverter tarefaConverter;
 
     public TarefaDTO gravandoTarefaDTO(String token, TarefaDTO dto) {
         String email = jwtUtil.extrairEmailToken(token.substring(7));
@@ -66,19 +66,13 @@ public class TarefaService {
         }
     }
 
-    public TarefaDTO updateDeTarefas(TarefaDTO dto, String id){
+    public TarefaDTO updateDeTarefas(TarefaDTO dto, String id) {
         try {
             TarefasEntity entity = tarefaRepository.findById(id).
                     orElseThrow(() -> new RuntimeException("Tarefa não encontrada! " + id));
-            tarefaUpdateConverter.updateTarefas(dto, entity);
-
-            // Forçando para que seja Alterado a dataEvento
-            if (dto.getDataEvento() != null){
-                entity.setDataEvento(dto.getDataEvento()); // Forçando Atualização
-            }
-
-            return tarefaMapper.paraTarefaDTO(tarefaRepository.save(entity));
-        }catch (RuntimeException e){
+            TarefasEntity tarefasEntity = tarefaConverter.updtadeBuiderTarefaEntity(dto, entity);
+            return tarefaConverter.paraTarefaDTO_builder(tarefaRepository.save(tarefasEntity));
+        } catch (RuntimeException e) {
             throw new RuntimeException("Erro ao cadastrar tarefa!" + e.getCause());
         }
     }

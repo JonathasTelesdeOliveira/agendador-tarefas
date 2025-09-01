@@ -8,10 +8,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface TarefaMapper {
-/*    @Mapping(source = "id", target = "id")
-    @Mapping(source = "dataEvento", target = "dataEvento")
-    @Mapping(source = "dataCriacao", target = "dataCriacao")
-*/  TarefasEntity paraTarefasEntity(TarefaDTO tarefaDTO);
+  TarefasEntity paraTarefasEntity(TarefaDTO tarefaDTO);
 
     TarefaDTO paraTarefaDTO(TarefasEntity tarefasEntity);
 
