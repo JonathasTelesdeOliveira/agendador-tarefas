@@ -4,8 +4,14 @@ import com.jhonatanTeles.agendadorTarefas.Infraestruture.entity.TarefasEntity;
 import com.jhonatanTeles.agendadorTarefas.busines.dto.TarefaDTO;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class TarefaConverter {
+
+    public List<TarefaDTO> paraListaTarefaDTO_Build(List<TarefasEntity> listaTarefaDTOS) {
+        return listaTarefaDTOS.stream().map(this::paraTarefaDTO_builder).toList();
+    }
 
     public TarefaDTO paraTarefaDTO_builder(TarefasEntity entity){
         return TarefaDTO.builder()
