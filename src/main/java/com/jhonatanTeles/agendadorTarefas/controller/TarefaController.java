@@ -27,19 +27,15 @@ public class TarefaController {
 
     @GetMapping("/evento")
     public ResponseEntity<List<TarefaDTO>> buscarTarefasPorPeriodo(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataInical,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataInicial,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFinal) {
-        return ResponseEntity.ok(tarefaService.buscarTarefasAgendadasPorPeriodo(dataInical, dataFinal));
+        return ResponseEntity.ok(tarefaService.buscarTarefasAgendadasPorPeriodo(dataInicial, dataFinal));
     }
 
     @GetMapping
     public ResponseEntity<List<TarefaDTO>> buscarTarefaEmail(
             @RequestHeader("Authorization") String token) {
         return ResponseEntity.ok(tarefaService.buscarTarefaPorEmail(token));
-        /*
-        List<TarefaDTO> tarefaDTOS = tarefaService.buscarTarefaPorEmail(token);
-        return ResponseEntity.ok(tarefaDTOS);
-        */
     }
 
     @DeleteMapping
